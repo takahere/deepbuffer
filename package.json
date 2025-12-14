@@ -1,0 +1,37 @@
+{
+  "name": "deepbuffer",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:api": "tsx --watch api/dev.ts",
+    "start:local": "npm run dev & npm run dev:api",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@google/genai": "^1.33.0",
+    "@hono/node-server": "^1.13.7",
+    "@supabase/supabase-js": "^2.39.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "cheerio": "^1.1.2",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.0",
+    "hono": "^4.0.0",
+    "lucide-react": "^0.561.0",
+    "node-cron": "^4.2.1",
+    "openai": "^6.10.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-router-dom": "^6.30.2",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.35",
+    "@types/node": "^22.14.0",
+    "@types/node-cron": "^3.0.11",
+    "tsx": "^4.7.0"
+  }
+}

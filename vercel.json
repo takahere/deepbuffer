@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.ts" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "functions": {
+    "api/index.ts": {
+      "maxDuration": 60
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/summarize",
+      "schedule": "0 23 * * *"
+    },
+    {
+      "path": "/api/cron/summarize",
+      "schedule": "0 4 * * *"
+    },
+    {
+      "path": "/api/cron/summarize",
+      "schedule": "0 10 * * *"
+    },
+    {
+      "path": "/api/cron/retention",
+      "schedule": "0 19 * * *"
+    }
+  ]
+}
