@@ -28,7 +28,8 @@ export const generateSummary = async (messages: string[], customInstructions?: s
       2. 「緊急の依頼」「決定事項」「有益な情報の共有」のみを抽出する。
       3. 全体を「全体概況」と「個別トピック」に分けて構造化する。
       4. 特に重要なトピックを3つ以内で抽出し、キーワードとして列挙する。
-      ${customInstructions ? `5. 【ユーザーからの追加指示】: ${customInstructions}` : ''}
+      5. SlackのユーザーID（例: U12345）やメッセージIDは出力に含めないでください。代わりに表示名を使用するか、IDを削除してください。
+      ${customInstructions ? `6. 【ユーザーからの追加指示】: ${customInstructions}` : ''}
 
       【入力メッセージ】
       ${contentList}

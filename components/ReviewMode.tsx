@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Message, DailySummary, Workspace } from '../types';
 import { MessageCard } from './MessageCard';
 import { Sparkles, Layers, MessageSquare, Send, Loader2, X, Clock, Zap, Filter, RotateCcw } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 import { Button } from './Button';
-import { askAboutSummary } from '../services/aiService';
 import { api } from '../services/api';
 
 interface ReviewModeProps {
@@ -155,9 +155,19 @@ export const ReviewMode: React.FC<ReviewModeProps> = ({
                 </div>
               </div>
               
-              <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm lg:text-base">
-                {summary.summaryText}
-              </p>
+              <div className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm lg:text-base markdown-content">
+                <ReactMarkdown
+                  components={{
+                    h3: ({node, ...props}) => <h3 className="text-indigo-900 dark:text-indigo-100 font-bold mt-4 mb-2 text-base lg:text-lg" {...props} />,
+                    ul: ({node, ...props}) => <ul className="list-disc list-inside space-y-1 mb-4" {...props} />,
+                    li: ({node, ...props}) => <li className="pl-1" {...props} />,
+                    p: ({node, ...props}) => <p className="mb-2 last:mb-0" {...props} />,
+                    strong: ({node, ...props}) => <strong className="font-semibold text-slate-900 dark:text-slate-100" {...props} />,
+                  }}
+                >
+                  {summary.summaryText}
+                </ReactMarkdown>
+              </div>
               <div className="mt-4 flex flex-wrap gap-2">
                 {summary.keyTopics.map(topic => (
                   <span key={topic} className="px-2 py-1 rounded bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-300 text-xs">
