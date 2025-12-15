@@ -188,17 +188,17 @@ function App() {
   };
 
   const handleArchiveAll = async () => {
-    // Optimistic update
-    setMessages([]); 
-    
+    // Optimistic update: archive only non-web (Slack) items
+    setMessages(prev => prev.filter(m => m.sourceType === 'web_clip'));
+
     // Call backend
     const success = await api.archiveAllMessages(selectedWorkspaceId);
     if (success) {
       await fetchData(); // Refresh to ensure sync
     } else {
       console.error('Failed to archive all messages');
-      // Ideally revert state or show error
-      fetchData(); // Re-fetch to restore correct state
+      // Revert: refetch to restore full state
+      fetchData();
     }
   };
 

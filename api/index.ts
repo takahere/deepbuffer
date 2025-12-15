@@ -346,7 +346,8 @@ app.post('/items/archive-all', async (c) => {
     .from('items')
     .update({ status: 'archived' })
     .eq('user_id', user.id)
-    .neq('status', 'archived'); 
+    .neq('status', 'archived')
+    .neq('source_type', 'web'); // Keep Link Pocket (web) items
 
   if (workspaceId && workspaceId !== 'all') {
     query = query.eq('meta_data->>team', workspaceId);
