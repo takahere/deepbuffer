@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ViewState } from '../types';
-import { Inbox, Bookmark, Settings, Coffee, Zap, LogOut, Menu, X } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { Inbox, Bookmark, Settings, Coffee, Zap, Menu, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface SidebarProps {
@@ -12,16 +11,8 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ currentView, onChangeView, isLocked, onToggleLock }) => {
-  const { signOut } = useAuth();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const handleLogout = async () => {
-    if (confirm('ログアウトしますか？')) {
-      await signOut();
-      navigate('/login');
-    }
-  };
 
   const NavItem = ({ view, icon: Icon, label }: { view: ViewState; icon: any; label: string }) => (
     <button
@@ -75,16 +66,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onChangeView, isL
           <NavItem view="pocket" icon={Bookmark} label="リンクポケット" />
           <NavItem view="settings" icon={Settings} label="設定" />
         </nav>
-
-        <div className="px-3 pb-2">
-          <button
-            onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-slate-600 dark:text-slate-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 group"
-          >
-            <LogOut size={20} className="text-slate-400 group-hover:text-red-500 dark:group-hover:text-red-400" />
-            <span className="font-medium text-sm">ログアウト</span>
-          </button>
-        </div>
 
         <div className="p-4 border-t border-slate-200 dark:border-slate-800">
           <button 
