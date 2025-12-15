@@ -5,7 +5,6 @@ import { FocusMode } from './components/FocusMode';
 import { ReviewMode } from './components/ReviewMode';
 import { LinkPocket } from './components/LinkPocket';
 import { Settings } from './components/Settings';
-import { ProfileMenu } from './components/ProfileMenu';
 import { MOCK_MESSAGES, MOCK_SUMMARY, DEFAULT_SETTINGS, MOCK_WORKSPACES } from './constants';
 import { Message, ViewState, UserSettings, Workspace, DailySummary } from './types';
 import { api } from './services/api';
