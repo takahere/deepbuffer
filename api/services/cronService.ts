@@ -136,11 +136,8 @@ export const runRetentionPolicy = async () => {
       .from('items')
       .delete({ count: 'exact' })
       .lt('created_at', dateThreshold.toISOString())
-      .in('status', ['archived', 'done', 'summarized']); // Only delete processed items, keep pending? Or delete all?
-      // User request was "delete items older than 1 week". 
-      // Usually we shouldn't delete 'pending' items even if old, but for safety let's only delete processed ones.
-      // If user wants EVERYTHING deleted, we can remove the status filter.
-      // Let's assume processed items for safety first.
+      .in('status', ['archived', 'done', 'summarized'])
+      .neq('source_type', 'web'); // Keep Link Pocket items
     
     if (error) {
       console.error('[Scheduler] Retention Error:', error);
