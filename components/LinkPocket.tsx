@@ -66,7 +66,7 @@ export const LinkPocket: React.FC<LinkPocketProps> = ({ links, onAddLink, onDele
         </div>
 
         {/* Search & Filter Toolbar */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-between items-start sm:items-center sticky top-0 bg-slate-50/95 dark:bg-[#0B1121]/95 backdrop-blur py-2 z-20 transition-colors duration-300">
+        <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-between items-start sm:items-center relative md:sticky top-0 bg-slate-50/95 dark:bg-[#0B1121]/95 backdrop-blur py-2 z-20 transition-colors duration-300">
           <div className="relative w-full sm:w-64">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" size={16} />
             <input 

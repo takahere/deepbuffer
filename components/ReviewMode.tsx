@@ -93,7 +93,7 @@ export const ReviewMode: React.FC<ReviewModeProps> = ({
   return (
     <div className="h-full flex flex-col max-w-4xl mx-auto">
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-slate-50/95 dark:bg-[#0f172a]/95 backdrop-blur-md pt-16 md:pt-8 pb-4 px-4 md:px-6 border-b border-slate-200 dark:border-slate-800/50 mb-6 flex flex-col md:flex-row justify-between items-start md:items-end transition-colors duration-300 gap-4 md:gap-0">
+      <div className="relative md:sticky top-0 z-10 bg-slate-50/95 dark:bg-[#0f172a]/95 backdrop-blur-md pt-16 md:pt-8 pb-4 px-4 md:px-6 border-b border-slate-200 dark:border-slate-800/50 mb-6 flex flex-col md:flex-row justify-between items-start md:items-end transition-colors duration-300 gap-4 md:gap-0">
         <div className="w-full md:w-auto">
           <div className="flex items-center gap-2 mb-1">
              <Zap size={20} className="text-indigo-600 dark:text-indigo-400" />
