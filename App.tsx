@@ -277,9 +277,6 @@ function App() {
       />
       
       <main className="flex-1 h-screen overflow-y-auto bg-slate-50 dark:bg-[#0B1121] relative transition-colors duration-300 w-full pb-20 md:pb-0">
-         {/* Profile Menu */}
-         <ProfileMenu />
-
          {/* Background Ambient Effect */}
          <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-0">
             {/* Dynamic Background Colors based on Mode */}
