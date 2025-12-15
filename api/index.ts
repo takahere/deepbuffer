@@ -304,6 +304,7 @@ app.get('/items/pending/count', async (c) => {
     .from('items')
     .select('*', { count: 'exact', head: true })
     .eq('status', 'pending')
+    .eq('source_type', 'slack') // Only count Slack items as "noise" for Focus Mode
     .eq('user_id', user.id);
 
   if (error) return c.json({ error: error.message }, 500);

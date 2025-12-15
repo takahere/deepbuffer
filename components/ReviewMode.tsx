@@ -100,7 +100,7 @@ export const ReviewMode: React.FC<ReviewModeProps> = ({
              <h1 className="text-xl md:text-2xl font-bold text-slate-800 dark:text-slate-100">Focus Mode</h1>
           </div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 mt-2 md:mt-0">
-             <p className="text-slate-500 dark:text-slate-400 text-sm whitespace-nowrap">{messages.length} 件のアイテムを処理中</p>
+             <p className="text-slate-500 dark:text-slate-400 text-sm whitespace-nowrap">{messages.filter(m => m.sourceType === 'slack').length} 件のアイテムを処理中</p>
              
              {/* Workspace Filter & Refresh */}
              <div className="flex items-center gap-2 w-full sm:w-auto">
