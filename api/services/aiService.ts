@@ -54,7 +54,13 @@ export const generateSummary = async (messages: string[], customInstructions?: s
     const text = response.choices[0].message.content;
     if (!text) return null;
 
-    return JSON.parse(text) as SummaryResult;
+    const result = JSON.parse(text) as SummaryResult;
+
+    // Remove UUIDs (e.g. 2ab62399-c0e6-4576-b152-f0b8faac292d) from the summary text
+    const uuidRegex = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/gi;
+    result.summaryText = result.summaryText.replace(uuidRegex, '').replace(/\n\s*\n/g, '\n');
+
+    return result;
   } catch (error) {
     console.error("OpenAI API Error:", error);
     return null;
