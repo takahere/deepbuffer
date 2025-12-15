@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sidebar } from './components/Sidebar';
+import { ProfileMenu } from './components/ProfileMenu';
 import { FocusMode } from './components/FocusMode';
 import { ReviewMode } from './components/ReviewMode';
 import { LinkPocket } from './components/LinkPocket';
@@ -300,6 +301,11 @@ function App() {
          </div>
          
          <div className="relative z-10 h-full">
+            {/* Top Right Profile Menu - Fixed position to overlay everything */}
+            <div className="absolute top-4 right-4 md:top-6 md:right-8 z-50">
+              <ProfileMenu />
+            </div>
+
             {renderView()}
          </div>
       </main>
