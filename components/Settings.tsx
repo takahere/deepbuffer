@@ -156,12 +156,12 @@ export const Settings: React.FC<SettingsProps> = ({
   );
 
   return (
-    <div className="max-w-2xl mx-auto pt-8 px-6 pb-20">
-      <div className="flex justify-between items-center mb-8">
+    <div className="max-w-2xl mx-auto pt-8 px-4 md:px-6 pb-20">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 md:gap-0">
         <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100">設定</h2>
         <button
           onClick={onToggleDarkMode}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors"
+          className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors w-full md:w-auto justify-center"
         >
           {isDarkMode ? <Moon size={16} /> : <Sun size={16} />}
           <span className="text-sm font-medium">{isDarkMode ? 'ダークモード' : 'ライトモード'}</span>
@@ -169,7 +169,7 @@ export const Settings: React.FC<SettingsProps> = ({
       </div>
 
       {/* Workspace Integration */}
-      <div className="bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-700 rounded-xl p-6 mb-6 shadow-sm">
+      <div className="bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-700 rounded-xl p-4 md:p-6 mb-6 shadow-sm">
         <div className="flex items-start justify-between mb-4">
            <div>
              <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200 flex items-center gap-2">
@@ -183,19 +183,19 @@ export const Settings: React.FC<SettingsProps> = ({
         
         <div className="space-y-3 mb-4">
           {workspaces.map(ws => (
-             <div key={ws.id} className="flex justify-between items-center bg-slate-50 dark:bg-slate-900/50 p-3 rounded-lg border border-slate-200 dark:border-slate-800">
-               <div className="flex items-center gap-3">
-                 <img src={ws.iconUrl} alt={ws.name} className="w-8 h-8 rounded-lg" />
-                 <div>
-                   <p className="text-sm font-medium text-slate-800 dark:text-slate-200">{ws.name}</p>
-                   <p className="text-xs text-slate-500">ID: {ws.slackTeamId}</p>
+             <div key={ws.id} className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-slate-50 dark:bg-slate-900/50 p-3 rounded-lg border border-slate-200 dark:border-slate-800 gap-3 sm:gap-0">
+               <div className="flex items-center gap-3 w-full sm:w-auto">
+                 <img src={ws.iconUrl} alt={ws.name} className="w-8 h-8 rounded-lg flex-shrink-0" />
+                 <div className="min-w-0">
+                   <p className="text-sm font-medium text-slate-800 dark:text-slate-200 truncate">{ws.name}</p>
+                   <p className="text-xs text-slate-500 truncate">ID: {ws.slackTeamId}</p>
                  </div>
                </div>
                <Button 
                  variant="ghost" 
                  size="sm" 
                  onClick={() => onRemoveWorkspace(ws.id)} 
-                 className="text-slate-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10"
+                 className="text-slate-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 w-full sm:w-auto justify-center"
                 >
                   <Trash2 size={16} />
                </Button>

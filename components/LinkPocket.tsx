@@ -41,24 +41,24 @@ export const LinkPocket: React.FC<LinkPocketProps> = ({ links, onAddLink, onDele
   }, [links, searchQuery, filterType]);
 
   return (
-    <div className="max-w-4xl mx-auto pt-8 px-6 pb-20 h-full flex flex-col">
+    <div className="max-w-4xl mx-auto pt-8 px-4 md:px-6 pb-20 h-full flex flex-col">
       <div className="flex-shrink-0">
-        <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-6 flex items-center gap-3">
+        <h2 className="text-xl md:text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-6 flex items-center gap-3">
           <Link2 className="text-blue-500 dark:text-blue-400" /> ユニバーサル・リンクポケット
         </h2>
         
         {/* Add Link Input */}
         <div className="bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-700/50 rounded-xl p-4 mb-6 shadow-sm dark:shadow-black/20">
-          <form onSubmit={handleSubmit} className="flex gap-3">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
             <input
               type="url"
               value={urlInput}
               onChange={(e) => setUrlInput(e.target.value)}
               placeholder="保存したいURLをここに貼り付け..."
-              className="flex-1 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              className="flex-1 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all w-full"
               required
             />
-            <Button type="submit" variant="primary">
+            <Button type="submit" variant="primary" className="w-full sm:w-auto justify-center">
               <Plus size={18} className="mr-2" />
               追加
             </Button>
@@ -66,7 +66,7 @@ export const LinkPocket: React.FC<LinkPocketProps> = ({ links, onAddLink, onDele
         </div>
 
         {/* Search & Filter Toolbar */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-between items-center sticky top-0 bg-slate-50/95 dark:bg-[#0B1121]/95 backdrop-blur py-2 z-20 transition-colors duration-300">
+        <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-between items-start sm:items-center sticky top-0 bg-slate-50/95 dark:bg-[#0B1121]/95 backdrop-blur py-2 z-20 transition-colors duration-300">
           <div className="relative w-full sm:w-64">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" size={16} />
             <input 
@@ -78,12 +78,12 @@ export const LinkPocket: React.FC<LinkPocketProps> = ({ links, onAddLink, onDele
             />
           </div>
 
-          <div className="flex bg-white dark:bg-slate-800/50 p-1 rounded-lg border border-slate-200 dark:border-slate-700/50">
+          <div className="flex bg-white dark:bg-slate-800/50 p-1 rounded-lg border border-slate-200 dark:border-slate-700/50 w-full sm:w-auto overflow-x-auto">
             {(['all', 'web', 'slack'] as FilterType[]).map((type) => (
               <button
                 key={type}
                 onClick={() => setFilterType(type)}
-                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
+                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all flex-1 sm:flex-initial whitespace-nowrap ${
                   filterType === type 
                     ? 'bg-indigo-600 text-white shadow-sm' 
                     : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700/50'
@@ -103,9 +103,9 @@ export const LinkPocket: React.FC<LinkPocketProps> = ({ links, onAddLink, onDele
         {/* Timeline Line */}
         <div className="absolute left-[27px] top-0 bottom-0 w-px bg-slate-200 dark:bg-slate-800" />
 
-        <div className="space-y-8 pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-10">
           {filteredLinks.length === 0 && (
-            <div className="ml-12 py-8 text-center border border-dashed border-slate-300 dark:border-slate-800 rounded-xl">
+            <div className="md:col-span-2 ml-12 py-8 text-center border border-dashed border-slate-300 dark:border-slate-800 rounded-xl">
               <p className="text-slate-500 italic mb-2">表示するリンクがありません。</p>
               {(searchQuery || filterType !== 'all') && (
                  <button onClick={() => {setSearchQuery(''); setFilterType('all');}} className="text-indigo-500 dark:text-indigo-400 text-sm hover:underline">
@@ -126,7 +126,7 @@ export const LinkPocket: React.FC<LinkPocketProps> = ({ links, onAddLink, onDele
               </div>
 
               {/* Content Card */}
-              <div className="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-xl overflow-hidden hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all hover:translate-x-1 group-hover:border-slate-300 dark:group-hover:border-slate-600/50 shadow-sm">
+              <div className="h-full flex flex-col bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-xl overflow-hidden hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all hover:translate-x-1 group-hover:border-slate-300 dark:group-hover:border-slate-600/50 shadow-sm">
                 
                 {/* OGP Image (if available) */}
                 {link.ogImage && (
@@ -140,7 +140,7 @@ export const LinkPocket: React.FC<LinkPocketProps> = ({ links, onAddLink, onDele
                   </div>
                 )}
 
-                <div className="p-5">
+                <div className="p-5 flex-1 flex flex-col">
                 <div className="flex justify-between items-start mb-2">
                    <div className="flex items-center gap-3">
                       <span className={`text-xs font-mono px-2 py-0.5 rounded border ${
@@ -206,7 +206,7 @@ export const LinkPocket: React.FC<LinkPocketProps> = ({ links, onAddLink, onDele
                   </div>
                 )}
 
-                  <div className="flex items-center gap-2 flex-wrap mt-2">
+                  <div className="flex items-center gap-2 flex-wrap mt-auto pt-2">
                    {link.tags?.map(tag => (
                       <span key={tag} className="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 px-2 py-0.5 rounded-full">
                         #{tag}

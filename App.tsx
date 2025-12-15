@@ -267,7 +267,7 @@ function App() {
   };
 
   return (
-    <div className="flex h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-50 overflow-hidden transition-colors duration-300">
+    <div className="flex flex-col md:flex-row h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-50 overflow-hidden transition-colors duration-300">
       <Sidebar 
         currentView={currentView} 
         onChangeView={setCurrentView}
@@ -275,19 +275,19 @@ function App() {
         onToggleLock={handleToggleLock}
       />
       
-      <main className="flex-1 h-screen overflow-y-auto bg-slate-50 dark:bg-[#0B1121] relative transition-colors duration-300">
+      <main className="flex-1 h-screen overflow-y-auto bg-slate-50 dark:bg-[#0B1121] relative transition-colors duration-300 w-full pb-20 md:pb-0">
          {/* Background Ambient Effect */}
          <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-0">
             {/* Dynamic Background Colors based on Mode */}
             <div className={`
-              absolute top-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full blur-3xl transition-colors duration-1000
+              absolute top-[-10%] right-[-10%] w-[250px] h-[250px] lg:w-[500px] lg:h-[500px] rounded-full blur-3xl transition-colors duration-1000
               ${isLocked 
                 ? 'bg-teal-200/40 dark:bg-teal-900/10'  // Calm Mode Colors
                 : 'bg-indigo-200/40 dark:bg-indigo-900/10' // Focus Mode Colors
               }
             `}></div>
             <div className={`
-              absolute bottom-[-10%] left-[10%] w-[400px] h-[400px] rounded-full blur-3xl transition-colors duration-1000
+              absolute bottom-[-10%] left-[10%] w-[200px] h-[200px] lg:w-[400px] lg:h-[400px] rounded-full blur-3xl transition-colors duration-1000
               ${isLocked 
                 ? 'bg-emerald-200/40 dark:bg-emerald-900/10' // Calm Mode Colors
                 : 'bg-blue-200/40 dark:bg-blue-900/10' // Focus Mode Colors

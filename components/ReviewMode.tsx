@@ -93,72 +93,76 @@ export const ReviewMode: React.FC<ReviewModeProps> = ({
   return (
     <div className="h-full flex flex-col max-w-4xl mx-auto">
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-slate-50/95 dark:bg-[#0f172a]/95 backdrop-blur-md pt-8 pb-4 px-6 border-b border-slate-200 dark:border-slate-800/50 mb-6 flex justify-between items-end transition-colors duration-300">
-        <div>
+      <div className="sticky top-0 z-10 bg-slate-50/95 dark:bg-[#0f172a]/95 backdrop-blur-md pt-16 md:pt-8 pb-4 px-4 md:px-6 border-b border-slate-200 dark:border-slate-800/50 mb-6 flex flex-col md:flex-row justify-between items-start md:items-end transition-colors duration-300 gap-4 md:gap-0">
+        <div className="w-full md:w-auto">
           <div className="flex items-center gap-2 mb-1">
              <Zap size={20} className="text-indigo-600 dark:text-indigo-400" />
-             <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">Focus Mode</h1>
+             <h1 className="text-xl md:text-2xl font-bold text-slate-800 dark:text-slate-100">Focus Mode</h1>
           </div>
-          <div className="flex items-center gap-4">
-             <p className="text-slate-500 dark:text-slate-400 text-sm">{messages.length} 件のアイテムを処理中</p>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 mt-2 md:mt-0">
+             <p className="text-slate-500 dark:text-slate-400 text-sm whitespace-nowrap">{messages.length} 件のアイテムを処理中</p>
              
-             {/* Workspace Filter */}
-             {workspaces.length > 0 && onSelectWorkspace && (
-               <div className="flex items-center gap-2 ml-4 bg-white dark:bg-slate-800 rounded-lg p-1 border border-slate-200 dark:border-slate-700">
-                  <Filter size={14} className="text-slate-400 ml-2" />
-                  <select 
-                    value={selectedWorkspaceId} 
-                    onChange={(e) => onSelectWorkspace(e.target.value)}
-                    className="bg-transparent text-sm text-slate-700 dark:text-slate-300 outline-none pr-2 py-0.5 cursor-pointer"
-                  >
-                    <option value="all">すべてのワークスペース</option>
-                    {workspaces.map(ws => (
-                      <option key={ws.id} value={ws.id}>{ws.name}</option>
-                    ))}
-                  </select>
-               </div>
-             )}
+             {/* Workspace Filter & Refresh */}
+             <div className="flex items-center gap-2 w-full sm:w-auto">
+               {workspaces.length > 0 && onSelectWorkspace && (
+                 <div className="flex items-center gap-2 flex-1 sm:flex-initial bg-white dark:bg-slate-800 rounded-lg p-1 border border-slate-200 dark:border-slate-700">
+                    <Filter size={14} className="text-slate-400 ml-2 flex-shrink-0" />
+                    <select 
+                      value={selectedWorkspaceId} 
+                      onChange={(e) => onSelectWorkspace(e.target.value)}
+                      className="bg-transparent text-sm text-slate-700 dark:text-slate-300 outline-none pr-2 py-0.5 cursor-pointer w-full"
+                    >
+                      <option value="all">すべてのワークスペース</option>
+                      {workspaces.map(ws => (
+                        <option key={ws.id} value={ws.id}>{ws.name}</option>
+                      ))}
+                    </select>
+                 </div>
+               )}
 
-             {/* Refresh Button */}
-             {onRefresh && (
-               <button 
-                 onClick={handleRefresh}
-                 disabled={isRefreshing}
-                 className={`ml-2 p-1.5 rounded-lg text-slate-400 hover:text-indigo-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors ${isRefreshing ? 'animate-spin' : ''}`}
-                 title="メッセージを更新"
-               >
-                 <RotateCcw size={16} />
-               </button>
-             )}
+               {/* Refresh Button */}
+               {onRefresh && (
+                 <button 
+                   onClick={handleRefresh}
+                   disabled={isRefreshing}
+                   className={`p-1.5 rounded-lg text-slate-400 hover:text-indigo-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors ${isRefreshing ? 'animate-spin' : ''}`}
+                   title="メッセージを更新"
+                 >
+                   <RotateCcw size={16} />
+                 </button>
+               )}
+             </div>
           </div>
         </div>
-        <Button onClick={onArchiveAll} variant="secondary">すべて完了（アーカイブ）</Button>
+        <div className="w-full md:w-auto flex justify-end">
+          <Button onClick={onArchiveAll} variant="secondary" className="w-full md:w-auto">すべて完了（アーカイブ）</Button>
+        </div>
       </div>
 
-      <div className="px-6 pb-20 space-y-8">
+      <div className="px-4 md:px-6 pb-20 space-y-6 md:space-y-8">
         {/* AI Summary Section */}
         {summary && (
-          <div className="bg-gradient-to-br from-indigo-50 to-white border border-indigo-100 dark:from-indigo-900/20 dark:to-slate-900 dark:border-indigo-500/20 rounded-xl p-6 relative overflow-hidden shadow-sm transition-colors duration-300">
+          <div className="bg-gradient-to-br from-indigo-50 to-white border border-indigo-100 dark:from-indigo-900/20 dark:to-slate-900 dark:border-indigo-500/20 rounded-xl p-4 md:p-6 relative overflow-hidden shadow-sm transition-colors duration-300">
             <div className="absolute top-0 right-0 p-4 opacity-10">
-              <Sparkles size={100} className="text-indigo-900 dark:text-white" />
+              <Sparkles size={80} className="text-indigo-900 dark:text-white md:w-[100px] md:h-[100px]" />
             </div>
             
             <div className="relative z-10">
-              <div className="flex justify-between items-start mb-4">
+              <div className="flex flex-col sm:flex-row justify-between items-start mb-4 gap-2">
                 <div className="flex items-center gap-2">
                    <Sparkles className="text-indigo-600 dark:text-indigo-400" size={18} />
                    <h3 className="text-indigo-900 dark:text-indigo-100 font-medium">バッチ要約レポート</h3>
                 </div>
-                <div className="flex items-center gap-1.5 text-xs text-indigo-700 dark:text-indigo-300/80 font-mono bg-indigo-100 dark:bg-indigo-500/10 px-3 py-1.5 rounded-full border border-indigo-200 dark:border-indigo-500/20">
+                <div className="flex items-center gap-1.5 text-xs text-indigo-700 dark:text-indigo-300/80 font-mono bg-indigo-100 dark:bg-indigo-500/10 px-3 py-1.5 rounded-full border border-indigo-200 dark:border-indigo-500/20 whitespace-nowrap">
                    <Clock size={12} />
                    {new Date(summary.targetDate).toLocaleDateString()} {new Date(summary.targetDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} 生成
                 </div>
               </div>
               
-              <div className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm lg:text-base markdown-content">
+              <div className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm md:text-base markdown-content">
                 <ReactMarkdown
                   components={{
-                    h3: ({node, ...props}) => <h3 className="text-indigo-900 dark:text-indigo-100 font-bold mt-4 mb-2 text-base lg:text-lg" {...props} />,
+                    h3: ({node, ...props}) => <h3 className="text-indigo-900 dark:text-indigo-100 font-bold mt-4 mb-2 text-base md:text-lg" {...props} />,
                     ul: ({node, ...props}) => <ul className="list-disc list-inside space-y-1 mb-4" {...props} />,
                     li: ({node, ...props}) => <li className="pl-1" {...props} />,
                     p: ({node, ...props}) => <p className="mb-2 last:mb-0" {...props} />,
