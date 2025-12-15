@@ -188,17 +188,13 @@ function App() {
   };
 
   const handleArchiveAll = async () => {
-    // Optimistic update: archive only non-web (Slack) items
-    setMessages(prev => prev.filter(m => m.sourceType === 'web_clip'));
-
-    // Call backend
+    // No optimistic removal to avoid flicker; rely on backend filtering to keep Link Pocket
     const success = await api.archiveAllMessages(selectedWorkspaceId);
     if (success) {
       await fetchData(); // Refresh to ensure sync
     } else {
       console.error('Failed to archive all messages');
-      // Revert: refetch to restore full state
-      fetchData();
+      fetchData(); // Re-fetch to restore correct state
     }
   };
 
